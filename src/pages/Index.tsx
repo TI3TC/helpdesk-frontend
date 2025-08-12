@@ -5,6 +5,7 @@ import { TicketStatusChart, WeeklyTicketsChart } from "@/components/charts/Ticke
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useToast } from "@/hooks/use-toast";
 import { Ticket as TicketIcon, Clock, Users, CheckCircle, Plus, TrendingUp, AlertTriangle } from "lucide-react";
 
 // Mock data
@@ -72,6 +73,29 @@ const mockTickets: Ticket[] = [
 ];
 
 const Index = () => {
+  const { toast } = useToast();
+
+  const handleNewTicket = () => {
+    toast({
+      title: "Novo Ticket",
+      description: "Funcionalidade em desenvolvimento. Em breve você poderá criar novos tickets!",
+    });
+  };
+
+  const handleViewAll = () => {
+    toast({
+      title: "Ver Todos os Tickets",
+      description: "Redirecionando para a lista completa de tickets...",
+    });
+  };
+
+  const handleQuickAction = (action: string) => {
+    toast({
+      title: action,
+      description: "Funcionalidade em desenvolvimento. Em breve estará disponível!",
+    });
+  };
+
   return (
     <Layout title="Dashboard">
       <div className="space-y-6">
@@ -84,7 +108,11 @@ const Index = () => {
                 Gerencie seus tickets de suporte de forma eficiente
               </p>
             </div>
-            <Button size="lg" className="bg-white/20 hover:bg-white/30 text-white border-white/30">
+            <Button 
+              size="lg" 
+              className="bg-white/20 hover:bg-white/30 text-white border-white/30"
+              onClick={handleNewTicket}
+            >
               <Plus className="mr-2 h-5 w-5" />
               Novo Ticket
             </Button>
@@ -131,7 +159,7 @@ const Index = () => {
             <Card>
               <CardHeader className="flex flex-row items-center justify-between">
                 <CardTitle>Tickets Recentes</CardTitle>
-                <Button variant="outline" size="sm">
+                <Button variant="outline" size="sm" onClick={handleViewAll}>
                   Ver Todos
                 </Button>
               </CardHeader>
@@ -176,15 +204,27 @@ const Index = () => {
                 <CardTitle>Ações Rápidas</CardTitle>
               </CardHeader>
               <CardContent className="space-y-2">
-                <Button className="w-full justify-start" variant="outline">
+                <Button 
+                  className="w-full justify-start" 
+                  variant="outline"
+                  onClick={() => handleQuickAction("Criar Novo Ticket")}
+                >
                   <Plus className="mr-2 h-4 w-4" />
                   Criar Novo Ticket
                 </Button>
-                <Button className="w-full justify-start" variant="outline">
+                <Button 
+                  className="w-full justify-start" 
+                  variant="outline"
+                  onClick={() => handleQuickAction("Gerenciar Usuários")}
+                >
                   <Users className="mr-2 h-4 w-4" />
                   Gerenciar Usuários
                 </Button>
-                <Button className="w-full justify-start" variant="outline">
+                <Button 
+                  className="w-full justify-start" 
+                  variant="outline"
+                  onClick={() => handleQuickAction("Relatórios")}
+                >
                   <TicketIcon className="mr-2 h-4 w-4" />
                   Relatórios
                 </Button>
