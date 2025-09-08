@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { signInWithMicrosoft } from './msalActions';
+import { signInWithMicrosoft, debugMsal } from './msalActions';
 
 export default function LoginPage() {
   const [mode, setMode] = useState<'login' | 'register'>('login');
@@ -19,8 +19,14 @@ export default function LoginPage() {
         <p className="text-center text-sm text-gray-600 mb-4">{mode === 'login' ? 'Faça login para continuar' : 'Crie sua conta'}</p>
 
         <button
-          onClick={signInWithMicrosoft}
-          className="w-full mb-3 rounded-xl border border-gray-300 py-2 text-sm font-medium hover:bg-gray-50"
+          <button
+  type="button"
+  onClick={debugMsal}
+  className="w-full mb-3 rounded-xl border border-dashed border-gray-300 py-2 text-xs text-gray-600 hover:bg-gray-50"
+>
+  Testar MSAL (debug)
+</button>
+
         >
           Entrar com Microsoft 365
         </button>
