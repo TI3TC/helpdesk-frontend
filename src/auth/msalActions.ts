@@ -1,4 +1,4 @@
-import { msal, ensureMsalInitialized, msalConfig, readEnvForDebug } from '../../auth/msal';
+import { msal, ensureMsalInitialized, readEnvForDebug } from '../../auth/msal';
 
 export async function signInWithMicrosoft() {
   try {
