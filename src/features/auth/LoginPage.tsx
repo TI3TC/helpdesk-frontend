@@ -1,18 +1,14 @@
 import { useState } from 'react';
+import { signInWithMicrosoft } from './msalActions';
 
 export default function LoginPage() {
   const [mode, setMode] = useState<'login' | 'register'>('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  // Por enquanto, só UI. Depois vamos ligar no /api/auth.
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert(`(${mode}) Em breve vamos conectar com a API.\nEmail: ${email}`);
-  };
-
-  const signInWithMicrosoft = () => {
-    alert('Em breve: Entrar com Microsoft 365');
+    alert(`(${mode}) Em breve conectaremos a API.\nEmail: ${email}`);
   };
 
   return (
@@ -22,8 +18,10 @@ export default function LoginPage() {
         <h1 className="text-2xl font-semibold text-center mb-1">Bem-vindo ao HelpDesk 3TC</h1>
         <p className="text-center text-sm text-gray-600 mb-4">{mode === 'login' ? 'Faça login para continuar' : 'Crie sua conta'}</p>
 
-        <button onClick={signInWithMicrosoft}
-          className="w-full mb-3 rounded-xl border border-gray-300 py-2 text-sm font-medium hover:bg-gray-50">
+        <button
+          onClick={signInWithMicrosoft}
+          className="w-full mb-3 rounded-xl border border-gray-300 py-2 text-sm font-medium hover:bg-gray-50"
+        >
           Entrar com Microsoft 365
         </button>
 
