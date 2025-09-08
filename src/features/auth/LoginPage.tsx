@@ -19,7 +19,6 @@ export default function LoginPage() {
         <p className="text-center text-sm text-gray-600 mb-4">{mode === 'login' ? 'Faça login para continuar' : 'Crie sua conta'}</p>
 
         <button
-          <button
   type="button"
   onClick={debugMsal}
   className="w-full mb-3 rounded-xl border border-dashed border-gray-300 py-2 text-xs text-gray-600 hover:bg-gray-50"
