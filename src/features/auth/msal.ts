@@ -1,35 +1,15 @@
 import { PublicClientApplication } from '@azure/msal-browser';
 
-/** pegas do .env (precisam começar com VITE_) */
-const clientId = import.meta.env.VITE_MSAL_CLIENT_ID || '';
-const tenantId = import.meta.env.VITE_MSAL_TENANT_ID || '';
+// --- COLOQUE SEUS GUIDS AQUI (os que você me passou) ---
+const clientId = 'd6881117-d053-4933-a5e2-b13532f2af95';
+const tenantId = 'a2f44e6b-598b-4d56-8e01-c63c72e21c10';
+// --------------------------------------------------------
 
-export const msalConfig = {
+export const msal = new PublicClientApplication({
   auth: {
     clientId,
-    authority: tenantId ? `https://login.microsoftonline.com/${tenantId}` : '',
+    authority: `https://login.microsoftonline.com/${tenantId}`,
     redirectUri: `${window.location.origin}/auth/callback`,
   },
-  cache: { cacheLocation: 'localStorage' as const },
-};
-
-export const msal = new PublicClientApplication(msalConfig);
-
-/** garante que o MSAL foi inicializado antes de usar */
-let inited = false;
-export async function ensureMsalInitialized() {
-  if (!inited) {
-    await msal.initialize();
-    inited = true;
-  }
-}
-
-/** helpers pra debug */
-export function readEnvForDebug() {
-  return {
-    envClientId: import.meta.env.VITE_MSAL_CLIENT_ID || '',
-    envTenantId: import.meta.env.VITE_MSAL_TENANT_ID || '',
-    redirectUri: msalConfig.auth.redirectUri,
-    origin: window.location.origin,
-  };
-}
+  cache: { cacheLocation: 'localStorage' },
+});
