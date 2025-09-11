@@ -1,22 +1,30 @@
-const API = import.meta.env.VITE_API_BASE_URL!;
+export type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
-async function req<T>(path: string, init?: RequestInit): Promise<T> {
-  const res = await fetch(`${API}${path}`, {
-    credentials: "include",                // envia/recebe cookies (sessão)
-    headers: { "Content-Type": "application/json", ...(init?.headers || {}) },
-    ...init
-  });
-  if (!res.ok) throw new Error((await res.text()) || res.statusText);
-  return res.json() as Promise<T>;
+
+const API_BASE = import.meta.env.VITE_API_BASE_URL ?? "";
+
+
+async function request<T>(path: string, method: HttpMethod = "GET", body?: unknown): Promise<T> {
+const res = await fetch(`${API_BASE}${path}` as string, {
+method,
+headers: body ? { "Content-Type": "application/json" } : undefined,
+credentials: "include", // envia/recebe cookies httpOnly
+body: body ? JSON.stringify(body) : undefined
+});
+if (!res.ok) {
+let msg = res.statusText;
+try { const data = await res.json(); msg = data?.error || msg; } catch {}
+throw new Error(msg);
+}
+return res.json() as Promise<T>;
 }
 
+
 export const api = {
-  health: () => req<{ ok: boolean; time: string }>("/healthz"),
-  me:     () => req<{ user: { id: string; email: string } }>("/auth/me"),
-  logout: () => req<void>("/auth/logout", { method: "POST" }) as any,
-  loginDev: (email: string) =>
-    req<{ user: { id: string; email: string } }>("/auth/dev-login", {
-      method: "POST", body: JSON.stringify({ email })
-    }),
-  tickets: () => req<{ items: Array<{ id: number; title: string; status: string }> }>("/tickets")
+health: () => request<{ ok: boolean; time: string }>("/healthz"),
+me: () => request<{ user: { id: string; email: string } }>("/auth/me"),
+logout: () => request<void>("/auth/logout", "POST"),
+// login temporário — ajuste se seu backend usa outra rota
+loginDev: (email: string) => request<{ user: { id: string; email: string } }>("/auth/dev-login", "POST", { email }),
+tickets: () => request<{ items: Array<{ id: number; title: string; status: string }> }>("/tickets")
 };
