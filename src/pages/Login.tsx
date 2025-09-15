@@ -1,31 +1,21 @@
-import { useState } from "react";
-import { useAuth } from "../store/auth";
+// src/pages/Login.tsx
 import { useNavigate } from "react-router-dom";
-
+import { signInWithMicrosoft } from "../auth/msalActions";
+import { usePostLogin } from "../auth/usePostLogin";
 
 export default function Login() {
-const [email, setEmail] = useState("");
-const { loginDev } = useAuth();
-const nav = useNavigate();
+  const navigate = useNavigate();
+  usePostLogin(navigate);
 
-
-async function onSubmit(e: React.FormEvent) {
-e.preventDefault();
-await loginDev(email);
-nav("/tickets");
-}
-
-
-return (
-<form onSubmit={onSubmit} className="max-w-sm mx-auto mt-24 space-y-3">
-<h1 className="text-2xl font-semibold">Login</h1>
-<input
-className="border rounded w-full p-2"
-placeholder="email@3tc.com.br"
-value={email}
-onChange={e => setEmail(e.target.value)}
-/>
-<button className="bg-black text-white px-4 py-2 rounded">Entrar</button>
-</form>
-);
+  return (
+    <div className="p-6 flex flex-col items-center justify-center h-screen">
+      <h1 className="text-2xl font-semibold mb-6">Login</h1>
+      <button
+        onClick={signInWithMicrosoft}
+        className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-lg shadow-md transition"
+      >
+        Entrar com Microsoft
+      </button>
+    </div>
+  );
 }
