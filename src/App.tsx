@@ -3,7 +3,7 @@ import Login from "./pages/Login";
 import Tickets from "./pages/Tickets";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import { AuthProvider } from "./store/auth";
-import AuthCallback from "./auth/AuthCallback"; // <-- import novo
+import AuthCallback from "./auth/AuthCallback.tsx"; // <-- import novo
 
 const router = createBrowserRouter([
   {
