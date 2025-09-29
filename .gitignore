@@ -1,12 +1,7 @@
-# node / build
 node_modules/
 dist/
+.vite/
 *.log
-npm-debug.log*
-pnpm-lock.yaml
-yarn.lock
-
-# env & secrets
 .env
 .env.*
 !.env.example
