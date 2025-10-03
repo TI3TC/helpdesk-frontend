@@ -1,21 +1,22 @@
 import { ReactNode } from "react";
-import { Header } from "./Header";
-import { Sidebar } from "./Sidebar";
+import { Sidebar } from "../components/sidebar/Sidebar";
+import { Topbar } from "../components/topbar/Topbar";
 
-interface LayoutProps {
-  children: ReactNode;
-}
-
-export const Layout = ({ children }: LayoutProps) => {
+export default function AppLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="flex h-screen bg-background">
-      <Sidebar />
-      <div className="flex flex-1 flex-col overflow-hidden">
-        <Header />
-        <main className="flex-1 overflow-auto p-6">
-          {children}
-        </main>
+    <div className="min-h-screen bg-background text-foreground grid md:grid-cols-[260px_1fr]">
+      {/* Sidebar */}
+      <aside className="border-r bg-card">
+        <Sidebar />
+      </aside>
+
+      {/* Conteúdo */}
+      <div className="min-h-screen flex flex-col">
+        <header className="sticky top-0 z-10 bg-card/80 backdrop-blur border-b">
+          <Topbar />
+        </header>
+        <main className="p-4 md:p-6">{children}</main>
       </div>
     </div>
   );
-};
+}
