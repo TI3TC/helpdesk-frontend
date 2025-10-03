@@ -8,7 +8,7 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 216 33% 97%;
     --foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%;
@@ -17,7 +17,7 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 214 84% 56%;
+    --primary: 213 76% 37%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 215 27% 92%;
@@ -53,10 +53,15 @@ All colors MUST be HSL.
     --sidebar-border: 220 13% 91%;
 
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --brand-hot: 0 65% 51%;     
+    --brand-blue: 210 79% 46%;  
+    --brand-cyan: 187 100% 38%; 
+    
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 215 28% 12%;
     --foreground: 210 40% 98%;
 
     --card: 222.2 84% 4.9%;
@@ -65,8 +70,8 @@ All colors MUST be HSL.
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 213 76% 47%;
+    --primary-foreground: 0 0% 100%;
 
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
@@ -91,6 +96,11 @@ All colors MUST be HSL.
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --brand-hot: 0 70% 58%;
+    --brand-blue: 210 79% 55%;
+    --brand-cyan: 187 100% 46%;
+    
   }
 }
 
